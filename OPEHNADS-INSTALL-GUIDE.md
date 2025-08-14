@@ -16,6 +16,7 @@ This is a guide for setting up and using OpenHands.
 ## Setup using Docker (recommanded option)
 - Create a folder of your choice and location
 - In that folder create docker-compose.yml file with following content.
+- IMPORTANT: DO NOT FORGET TO REPLACE LITELLM KEY (key must start with 'sk-'): sk-your-key-here
 ```yaml
 services:
   openhands-app:
@@ -42,7 +43,7 @@ services:
       - ./litellm-config.yml:/app/config.yaml
     restart: unless-stopped
     environment:
-      - LITELLM_API_KEY=${LITELLM_API_KEY}
+      - LITELLM_API_KEY=sk-your-key-here
       - AWS_REGION=us-east-1
       - PORT=80
     command: --config /app/config.yaml --detailed_debug
@@ -71,9 +72,8 @@ litellm_settings:
   drop_params: true
 ```
 - Optional step: Change the port number from 8150 to whatever you need.
-- Run the docker compose using this command (Note to replace any-key-you-like with some random key):
+- Run the docker compose using this command:
 ```bash
-export LITELLM_API_KEY=any-key-you-like
 docker-compose up -d
 ```
 - Access your OpenHands app at: http://localhost:8150
@@ -83,7 +83,7 @@ docker-compose up -d
 - Ensure that you are on LLM tab
 - Enter Custom Model as: litellm_proxy/Claude4
 - Enter Base URL as: http://litellm
-- Enter API Key as: Whatever you used as any-key-you-like
+- Enter API Key as: Whatever you used in docker-compose.yml file above (sk-your-key-here)
 
 ## How to connect to your personal GitHub?
 - Login to GitHub
@@ -106,3 +106,7 @@ docker-compose up -d
 7. Click **Generate token**
 8. **Copy the token immediately** (you won't see it again)
 
+## Get Approval to your Bedrock models
+- Login to AWS Console (using borwser)
+- Go to Bedrock service and get approval for all the models mentioned in the litellm-config.yml file.
+- Ensure that for the models id that start with "us." you have access to the cross region access. 
