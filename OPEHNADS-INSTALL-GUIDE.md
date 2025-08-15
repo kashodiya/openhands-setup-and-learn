@@ -10,8 +10,11 @@ This is a guide for setting up and using OpenHands.
 - OpenHands home page: https://docs.all-hands.dev/
 - OpenHands YouTube Channel: https://www.youtube.com/@All-Hands-AI
 
-## Setup your environment
+## Setup your environment (on EC2)
 - Install docker (ask ChatGPT or LLM on how to)
+
+## Allow ingres ports on EC2
+- Please allow tcp 30000-60000 port range on EC2 (using security group)
 
 ## Setup using Docker (recommanded option)
 - Create a folder of your choice and location
